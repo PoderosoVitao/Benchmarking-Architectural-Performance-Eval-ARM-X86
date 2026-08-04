@@ -1,0 +1,30 @@
+=== Benchmark Environment (native x86, re-run) ===
+Date:        seg 03 ago 2026 14:52:26 -03
+Hostname:    vhbr-cachyos-x8664
+--- CPU ---
+Architecture:                            x86_64
+CPU(s):                                  12
+On-line CPU(s) list:                     0-11
+Model name:                              AMD Ryzen 5 7600 6-Core Processor
+Thread(s) per core:                      2
+Core(s) per socket:                      6
+Socket(s):                               1
+CPU(s) scaling MHz:                      79%
+CPU max MHz:                             5171,8530
+CPU min MHz:                             405,0250
+L1d cache:                               192 KiB (6 instances)
+L1i cache:                               192 KiB (6 instances)
+L2 cache:                                6 MiB (6 instances)
+L3 cache:                                32 MiB (1 instance)
+NUMA node0 CPU(s):                       0-11
+--- Governor ---
+performance
+--- OS ---
+Linux vhbr-cachyos-x8664 7.1.5-1-cachyos #1 SMP PREEMPT_DYNAMIC Sun, 26 Jul 2026 08:59:50 +0000 x86_64 GNU/Linux
+--- Compiler ---
+gcc (GCC) 16.1.1 20260725
+--- OpenSSL ---
+OpenSSL 3.6.3 9 Jun 2026 (Library: OpenSSL 3.6.3 9 Jun 2026)
+--- liboqs --- 0.15.0 (source build, -DOQS_DIST_BUILD=ON)
+--- CPU Extensions ---
+aes avx2 avx512_bf avx512_bitalg avx512bw avx512cd avx512dq avx512f avx512ifma avx512_vbmi avx512vbmi avx512vl avx512_vnni avx512_vpopcntdq sha_ni 

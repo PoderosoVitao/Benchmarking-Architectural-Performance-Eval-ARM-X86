@@ -1,0 +1,22 @@
+=================================================================
+  Classical Baseline Benchmark — RSA-3072 / ECDSA P-256
+  OpenSSL version: OpenSSL 3.6.3 9 Jun 2026
+  iterations     : 1000  (+ 20 warm-up)
+  message size   : 64 bytes
+  output CSV     : /home/vhbr/Projects/TCC/Benchmarking/x86-native-run/results_20260803_145226/results_classical_x86.csv
+  raw samples CSV: /home/vhbr/Projects/TCC/Benchmarking/x86-native-run/results_20260803_145226/results_classical_x86_raw.csv
+=================================================================
+
+[RSA-3072]
+  RSA-3072                     keygen    mean=110.4765 ms  median= 92.7401 ms  std=71.2828 ms  P95=246.0148 ms  P99=351.3667 ms  mem_delta=    0 kB
+  RSA-3072                     sign      mean=  0.5150 ms  median=  0.5004 ms  std= 0.0654 ms  P95=  0.5449 ms  P99=  0.8615 ms  mem_delta=    0 kB
+  RSA-3072                     verify    mean=  0.0257 ms  median=  0.0256 ms  std= 0.0009 ms  P95=  0.0261 ms  P99=  0.0314 ms  mem_delta=    0 kB
+
+[ECDSA-P256]
+  ECDSA-P256                   keygen    mean=  0.0087 ms  median=  0.0087 ms  std= 0.0003 ms  P95=  0.0088 ms  P99=  0.0095 ms  mem_delta=    0 kB
+  ECDSA-P256                   sign      mean=  0.0136 ms  median=  0.0135 ms  std= 0.0005 ms  P95=  0.0136 ms  P99=  0.0164 ms  mem_delta=    0 kB
+  ECDSA-P256                   verify    mean=  0.0424 ms  median=  0.0422 ms  std= 0.0010 ms  P95=  0.0451 ms  P99=  0.0464 ms  mem_delta=    0 kB
+
+=================================================================
+  Done. Results written to: /home/vhbr/Projects/TCC/Benchmarking/x86-native-run/results_20260803_145226/results_classical_x86.csv
+=================================================================

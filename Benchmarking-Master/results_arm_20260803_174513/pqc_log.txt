@@ -1,0 +1,62 @@
+=================================================================
+  PQC Benchmark — Dilithium / FALCON / SPHINCS+
+  liboqs version : 0.15.0
+  iterations     : 1000  (+ 20 warm-up)
+  message size   : 64 bytes
+  output CSV     : /home/vhbraz/Benchmarking/results_20260803_174513/results_pqc_arm.csv
+  raw samples CSV: /home/vhbraz/Benchmarking/results_20260803_174513/results_pqc_arm_raw.csv
+=================================================================
+
+[SLH-DSA-SHA2-128s (SPHINCS+)]  (NIST Level 1)
+  SLH-DSA-SHA2-128s (SPHINCS+) keygen    mean=152.7928 ms  median=152.7735 ms  std= 0.0914 ms  P95=152.8710 ms  P99=153.3096 ms  mem_delta=    4 kB
+  SLH-DSA-SHA2-128s (SPHINCS+) sign      mean=1166.8486 ms  median=1166.8733 ms  std= 0.2723 ms  P95=1167.1892 ms  P99=1167.5808 ms  mem_delta=    0 kB
+  SLH-DSA-SHA2-128s (SPHINCS+) verify    mean=  1.0929 ms  median=  1.0917 ms  std= 0.0029 ms  P95=  1.0964 ms  P99=  1.0987 ms  mem_delta=    0 kB
+
+[SLH-DSA-SHA2-192s (SPHINCS+)]  (NIST Level 3)
+  SLH-DSA-SHA2-192s (SPHINCS+) keygen    mean=223.2387 ms  median=223.2425 ms  std= 0.0619 ms  P95=223.3217 ms  P99=223.3776 ms  mem_delta=    0 kB
+  SLH-DSA-SHA2-192s (SPHINCS+) sign      mean=2085.0923 ms  median=2085.2239 ms  std= 1.0036 ms  P95=2086.5680 ms  P99=2087.0308 ms  mem_delta=    0 kB
+  SLH-DSA-SHA2-192s (SPHINCS+) verify    mean=  1.7397 ms  median=  1.7384 ms  std= 0.0039 ms  P95=  1.7435 ms  P99=  1.7463 ms  mem_delta=    0 kB
+
+[SLH-DSA-SHA2-256s (SPHINCS+)]  (NIST Level 5)
+  SLH-DSA-SHA2-256s (SPHINCS+) keygen    mean=146.5033 ms  median=146.4897 ms  std= 0.0677 ms  P95=146.5785 ms  P99=146.6728 ms  mem_delta=    0 kB
+  SLH-DSA-SHA2-256s (SPHINCS+) sign      mean=1846.0748 ms  median=1846.1699 ms  std= 1.4174 ms  P95=1848.1278 ms  P99=1848.5179 ms  mem_delta=    0 kB
+  SLH-DSA-SHA2-256s (SPHINCS+) verify    mean=  2.5291 ms  median=  2.5292 ms  std= 0.0233 ms  P95=  2.5316 ms  P99=  2.5556 ms  mem_delta=    0 kB
+
+[SLH-DSA-SHAKE-128s (SPHINCS+)]  (NIST Level 1)
+  SLH-DSA-SHAKE-128s (SPHINCS+) keygen    mean=368.1176 ms  median=368.1133 ms  std= 0.0962 ms  P95=368.2190 ms  P99=368.6379 ms  mem_delta=    0 kB
+  SLH-DSA-SHAKE-128s (SPHINCS+) sign      mean=2835.6618 ms  median=2836.9108 ms  std= 2.9752 ms  P95=2837.3648 ms  P99=2837.5554 ms  mem_delta=    0 kB
+  SLH-DSA-SHAKE-128s (SPHINCS+) verify    mean=  2.9238 ms  median=  2.9244 ms  std= 0.0048 ms  P95=  2.9268 ms  P99=  2.9403 ms  mem_delta=    0 kB
+
+[SLH-DSA-SHAKE-256s (SPHINCS+)]  (NIST Level 5)
+  SLH-DSA-SHAKE-256s (SPHINCS+) keygen    mean=356.6891 ms  median=356.6832 ms  std= 0.0721 ms  P95=356.7935 ms  P99=356.9329 ms  mem_delta=    0 kB
+  SLH-DSA-SHAKE-256s (SPHINCS+) sign      mean=4590.1064 ms  median=4590.0957 ms  std= 0.4035 ms  P95=4590.7782 ms  P99=4591.1506 ms  mem_delta=    0 kB
+  SLH-DSA-SHAKE-256s (SPHINCS+) verify    mean=  5.7227 ms  median=  5.7218 ms  std= 0.0061 ms  P95=  5.7273 ms  P99=  5.7483 ms  mem_delta=    0 kB
+
+[Falcon-512]  (NIST Level 1)
+  Falcon-512                   keygen    mean= 17.8476 ms  median= 15.9964 ms  std= 5.2119 ms  P95= 29.2050 ms  P99= 37.1046 ms  mem_delta=    0 kB
+  Falcon-512                   sign      mean=  0.6337 ms  median=  0.6328 ms  std= 0.0076 ms  P95=  0.6459 ms  P99=  0.6522 ms  mem_delta=    0 kB
+  Falcon-512                   verify    mean=  0.0915 ms  median=  0.0913 ms  std= 0.0010 ms  P95=  0.0915 ms  P99=  0.0968 ms  mem_delta=    0 kB
+
+[Falcon-1024]  (NIST Level 5)
+  Falcon-1024                  keygen    mean= 50.1001 ms  median= 45.5749 ms  std=12.9591 ms  P95= 76.6549 ms  P99=100.8916 ms  mem_delta=    0 kB
+  Falcon-1024                  sign      mean=  1.2759 ms  median=  1.2759 ms  std= 0.0099 ms  P95=  1.2922 ms  P99=  1.2990 ms  mem_delta=    0 kB
+  Falcon-1024                  verify    mean=  0.1811 ms  median=  0.1809 ms  std= 0.0015 ms  P95=  0.1818 ms  P99=  0.1869 ms  mem_delta=    0 kB
+
+[ML-DSA-44 (Dilithium2)]  (NIST Level 2)
+  ML-DSA-44 (Dilithium2)       keygen    mean=  0.2107 ms  median=  0.2102 ms  std= 0.0031 ms  P95=  0.2154 ms  P99=  0.2193 ms  mem_delta=    0 kB
+  ML-DSA-44 (Dilithium2)       sign      mean=  0.9053 ms  median=  0.7234 ms  std= 0.5522 ms  P95=  1.9341 ms  P99=  2.9792 ms  mem_delta=    0 kB
+  ML-DSA-44 (Dilithium2)       verify    mean=  0.2247 ms  median=  0.2243 ms  std= 0.0029 ms  P95=  0.2300 ms  P99=  0.2312 ms  mem_delta=    0 kB
+
+[ML-DSA-65 (Dilithium3)]  (NIST Level 3)
+  ML-DSA-65 (Dilithium3)       keygen    mean=  0.3733 ms  median=  0.3717 ms  std= 0.0136 ms  P95=  0.3794 ms  P99=  0.3954 ms  mem_delta=    0 kB
+  ML-DSA-65 (Dilithium3)       sign      mean=  1.5221 ms  median=  1.2666 ms  std= 1.0108 ms  P95=  3.5396 ms  P99=  4.8069 ms  mem_delta=    0 kB
+  ML-DSA-65 (Dilithium3)       verify    mean=  0.3593 ms  median=  0.3586 ms  std= 0.0029 ms  P95=  0.3646 ms  P99=  0.3662 ms  mem_delta=    0 kB
+
+[ML-DSA-87 (Dilithium5)]  (NIST Level 5)
+  ML-DSA-87 (Dilithium5)       keygen    mean=  0.5639 ms  median=  0.5632 ms  std= 0.0039 ms  P95=  0.5708 ms  P99=  0.5737 ms  mem_delta=    0 kB
+  ML-DSA-87 (Dilithium5)       sign      mean=  1.7766 ms  median=  1.5229 ms  std= 1.0117 ms  P95=  3.7297 ms  P99=  5.3673 ms  mem_delta=    0 kB
+  ML-DSA-87 (Dilithium5)       verify    mean=  0.5863 ms  median=  0.5851 ms  std= 0.0045 ms  P95=  0.5917 ms  P99=  0.5967 ms  mem_delta=    0 kB
+
+=================================================================
+  Done. Results written to: /home/vhbraz/Benchmarking/results_20260803_174513/results_pqc_arm.csv
+=================================================================

@@ -1,0 +1,22 @@
+=================================================================
+  Classical Baseline Benchmark — RSA-3072 / ECDSA P-256
+  OpenSSL version: OpenSSL 3.5.5 27 Jan 2026
+  iterations     : 1000  (+ 20 warm-up)
+  message size   : 64 bytes
+  output CSV     : /home/vhbraz/Benchmarking/results_20260803_174513/results_classical_arm.csv
+  raw samples CSV: /home/vhbraz/Benchmarking/results_20260803_174513/results_classical_arm_raw.csv
+=================================================================
+
+[RSA-3072]
+  RSA-3072                     keygen    mean=1285.8691 ms  median=1118.1628 ms  std=819.8752 ms  P95=2885.6263 ms  P99=3898.4388 ms  mem_delta=    4 kB
+  RSA-3072                     sign      mean= 15.3235 ms  median= 15.2226 ms  std= 0.5200 ms  P95= 15.2967 ms  P99= 18.2332 ms  mem_delta=    0 kB
+  RSA-3072                     verify    mean=  0.2754 ms  median=  0.2749 ms  std= 0.0019 ms  P95=  0.2815 ms  P99=  0.2822 ms  mem_delta=    0 kB
+
+[ECDSA-P256]
+  ECDSA-P256                   keygen    mean=  0.0749 ms  median=  0.0746 ms  std= 0.0020 ms  P95=  0.0755 ms  P99=  0.0836 ms  mem_delta=    0 kB
+  ECDSA-P256                   sign      mean=  0.1045 ms  median=  0.1042 ms  std= 0.0015 ms  P95=  0.1048 ms  P99=  0.1121 ms  mem_delta=    0 kB
+  ECDSA-P256                   verify    mean=  0.2964 ms  median=  0.2957 ms  std= 0.0030 ms  P95=  0.3031 ms  P99=  0.3043 ms  mem_delta=    0 kB
+
+=================================================================
+  Done. Results written to: /home/vhbraz/Benchmarking/results_20260803_174513/results_classical_arm.csv
+=================================================================
