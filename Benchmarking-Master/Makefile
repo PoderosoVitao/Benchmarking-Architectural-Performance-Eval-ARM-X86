@@ -8,30 +8,33 @@
 #   make run        - build and run both benchmarks sequentially
 #   make clean      - remove binaries and CSV output
 #
-# Prerequisites (Debian/Ubuntu; adjust package manager elsewhere):
-#   sudo apt install build-essential cmake libssl-dev pkg-config git
-#   # Then build and install liboqs (0.15.0 used for this project's results):
-#   git clone --depth 1 --branch 0.15.0 \
-#       https://github.com/open-quantum-safe/liboqs.git
+# Prerequisites (Ubuntu 22.04):
+#   sudo apt install build-essential cmake ninja-build libssl-dev
+#   # Then build and install liboqs:
+#   git clone --depth 1 https://github.com/open-quantum-safe/liboqs.git
 #   cmake -S liboqs -B liboqs/build -DCMAKE_INSTALL_PREFIX=/usr/local \
-#         -DOQS_DIST_BUILD=ON -G "Unix Makefiles"
-#   # (swap in -GNinja if ninja-build is installed; not required)
+#         -DOQS_DIST_BUILD=ON -GNinja
 #   cmake --build liboqs/build --parallel
 #   sudo cmake --install liboqs/build
 # ──────────────────────────────────────────────────────────────────────────
 
 CC      = gcc
-CFLAGS  = -O2 -Wall -Wextra -I/usr/local/include
-LDFLAGS = -L/usr/local/lib
+OQS_PREFIX ?= $(HOME)/liboqs-install
+CFLAGS  = -O2 -Wall -Wextra -I$(OQS_PREFIX)/include
+LDFLAGS = -L$(OQS_PREFIX)/lib
 
-OQS_LIBS     = -loqs $(shell pkg-config --libs openssl) -lm
+OQS_LIBS     = -l:liboqs.a $(shell pkg-config --libs openssl) -lm -lpthread
 OPENSSL_LIBS = $(shell pkg-config --libs openssl) -lm
 
 TARGETS = bench_pqc bench_classical
+FAST_TARGETS = bench_pqc_fast bench_classical_fast
 
-.PHONY: all run run_pqc run_classical clean install_deps
+.PHONY: all run run_pqc run_classical clean install_deps fast
 
 all: $(TARGETS)
+
+# fast: N_ITERATIONS/WARMUP_ITERS overridden for perf-stat / concurrency sweeps
+fast: $(FAST_TARGETS)
 
 bench_pqc: bench_pqc.c benchmark.h
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS) $(OQS_LIBS)
@@ -41,6 +44,15 @@ bench_classical: bench_classical.c benchmark.h
 	$(CC) $(CFLAGS) -o $@ $< \
 	    $(shell pkg-config --cflags openssl) $(LDFLAGS) $(OPENSSL_LIBS)
 	@echo "Built: $@"
+
+bench_pqc_fast: bench_pqc.c benchmark.h
+	$(CC) $(CFLAGS) -DN_ITERATIONS=100 -DWARMUP_ITERS=5 -o $@ $< $(LDFLAGS) $(OQS_LIBS)
+	@echo "Built: $@ (N_ITERATIONS=100)"
+
+bench_classical_fast: bench_classical.c benchmark.h
+	$(CC) $(CFLAGS) -DN_ITERATIONS=100 -DWARMUP_ITERS=5 -o $@ $< \
+	    $(shell pkg-config --cflags openssl) $(LDFLAGS) $(OPENSSL_LIBS)
+	@echo "Built: $@ (N_ITERATIONS=100)"
 
 # ── run targets ──────────────────────────────────────────────────────────
 run: all run_pqc run_classical

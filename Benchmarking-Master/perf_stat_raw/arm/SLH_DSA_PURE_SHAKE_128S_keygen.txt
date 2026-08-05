@@ -1,0 +1,15 @@
+
+ Performance counter stats for './bench_pqc_fast /tmp/pm_scratch.csv /tmp/pm_scratch_raw.csv SLH_DSA_PURE_SHAKE_128S keygen':
+
+   119,786,198,962      instructions:u                   #    1.72  insn per cycle            
+    69,492,415,419      cycles:u                                                              
+    26,107,935,112      cache-references:u                                                    
+           225,654      cache-misses:u                   #    0.00% of all cache refs         
+         9,842,473      branch-misses:u                                                       
+
+      38.656219073 seconds time elapsed
+
+      38.644478000 seconds user
+       0.007999000 seconds sys
+
+

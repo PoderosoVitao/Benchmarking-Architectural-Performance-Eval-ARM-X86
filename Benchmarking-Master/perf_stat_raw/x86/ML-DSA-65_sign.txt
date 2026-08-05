@@ -1,0 +1,15 @@
+
+ Performance counter stats for './bench_pqc_fast /tmp/pm_scratch.csv /tmp/pm_scratch_raw.csv ML-DSA-65 sign':
+
+       109.470.110      instructions:u                                                        
+        30.101.226      cycles:u                                                              
+         1.343.215      cache-references:u                                                    
+            31.074      cache-misses:u                                                        
+            53.306      branch-misses:u                                                       
+
+       0,007612454 seconds time elapsed
+
+       0,006328000 seconds user
+       0,001263000 seconds sys
+
+

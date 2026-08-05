@@ -1,0 +1,15 @@
+
+ Performance counter stats for './bench_pqc_fast /tmp/pm_scratch.csv /tmp/pm_scratch_raw.csv Falcon-512 sign':
+
+       275.425.292      instructions:u                                                        
+        94.180.064      cycles:u                                                              
+           776.789      cache-references:u                                                    
+            30.123      cache-misses:u                                                        
+           169.245      branch-misses:u                                                       
+
+       0,019904650 seconds time elapsed
+
+       0,017814000 seconds user
+       0,001980000 seconds sys
+
+

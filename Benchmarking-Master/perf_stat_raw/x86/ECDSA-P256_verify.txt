@@ -1,0 +1,15 @@
+
+ Performance counter stats for './bench_classical_fast /tmp/pm_scratch.csv /tmp/pm_scratch_raw.csv ECDSA-P256 verify':
+
+        83.272.348      instructions:u                                                        
+        29.283.982      cycles:u                                                              
+           693.039      cache-references:u                                                    
+            46.080      cache-misses:u                                                        
+            58.347      branch-misses:u                                                       
+
+       0,007799941 seconds time elapsed
+
+       0,004628000 seconds user
+       0,003104000 seconds sys
+
+

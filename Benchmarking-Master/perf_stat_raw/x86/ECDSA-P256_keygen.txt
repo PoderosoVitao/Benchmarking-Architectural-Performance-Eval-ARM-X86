@@ -1,0 +1,15 @@
+
+ Performance counter stats for './bench_classical_fast /tmp/pm_scratch.csv /tmp/pm_scratch_raw.csv ECDSA-P256 keygen':
+
+        25.393.376      instructions:u                                                        
+        10.184.185      cycles:u                                                              
+           756.141      cache-references:u                                                    
+            30.381      cache-misses:u                                                        
+            56.949      branch-misses:u                                                       
+
+       0,003310717 seconds time elapsed
+
+       0,002282000 seconds user
+       0,001043000 seconds sys
+
+

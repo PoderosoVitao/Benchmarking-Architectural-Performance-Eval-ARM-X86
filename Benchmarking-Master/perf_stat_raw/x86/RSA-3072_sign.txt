@@ -1,0 +1,15 @@
+
+ Performance counter stats for './bench_classical_fast /tmp/pm_scratch.csv /tmp/pm_scratch_raw.csv RSA-3072 sign':
+
+     2.889.240.937      instructions:u                                                        
+       978.337.443      cycles:u                                                              
+           983.708      cache-references:u                                                    
+            40.563      cache-misses:u                                                        
+            97.565      branch-misses:u                                                       
+
+       0,195000912 seconds time elapsed
+
+       0,189908000 seconds user
+       0,003978000 seconds sys
+
+

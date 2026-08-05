@@ -1,0 +1,15 @@
+
+ Performance counter stats for './bench_pqc_fast /tmp/pm_scratch.csv /tmp/pm_scratch_raw.csv SLH_DSA_PURE_SHAKE_128S sign':
+
+ 1.485.803.809.798      instructions:u                                                        
+   287.682.716.188      cycles:u                                                              
+         8.759.700      cache-references:u                                                    
+           229.250      cache-misses:u                                                        
+         5.581.681      branch-misses:u                                                       
+
+      57,375762810 seconds time elapsed
+
+      56,942701000 seconds user
+       0,265542000 seconds sys
+
+

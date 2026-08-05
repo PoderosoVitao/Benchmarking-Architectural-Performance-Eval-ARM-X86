@@ -58,7 +58,8 @@ static const int N_ALGORITHMS = (int)(sizeof(ALGORITHMS) / sizeof(ALGORITHMS[0])
 
 /* ── Benchmark one algorithm ─────────────────────────────────────────────── */
 
-static void bench_algorithm(const AlgoEntry *entry, FILE *csv, FILE *raw_csv) {
+static void bench_algorithm(const AlgoEntry *entry, FILE *csv, FILE *raw_csv,
+                             const char *only_op) {
 
     printf("\n[%s]  (NIST Level %s)\n",
            entry->display_name, entry->security_level);
@@ -95,100 +96,116 @@ static void bench_algorithm(const AlgoEntry *entry, FILE *csv, FILE *raw_csv) {
     long mem_before, mem_after;
     Stats st;
 
+    /* only_op isolates one timed block for perf-stat profiling; the cheap
+     * untimed setup calls each later block depends on still run so results
+     * stay correct regardless of which block is skipped. */
+    int do_keygen = !only_op || strcmp(only_op, "keygen") == 0;
+    int do_sign   = !only_op || strcmp(only_op, "sign")   == 0;
+    int do_verify = !only_op || strcmp(only_op, "verify") == 0;
+
     /* ── KeyGen ──────────────────────────────────────────────────────────── */
 
-    /* warm-up */
-    for (int i = 0; i < WARMUP_ITERS; i++)
-        OQS_SIG_keypair(sig, pub_key, priv_key);
+    if (do_keygen) {
+        /* warm-up */
+        for (int i = 0; i < WARMUP_ITERS; i++)
+            OQS_SIG_keypair(sig, pub_key, priv_key);
 
-    mem_before = read_peak_rss_kb();
-    for (int i = 0; i < N_ITERATIONS; i++) {
-        t0 = now_ns();
-        rc = OQS_SIG_keypair(sig, pub_key, priv_key);
-        t1 = now_ns();
-        if (rc != OQS_SUCCESS) {
-            fprintf(stderr, "  KeyGen failed at iteration %d\n", i);
-            break;
+        mem_before = read_peak_rss_kb();
+        for (int i = 0; i < N_ITERATIONS; i++) {
+            t0 = now_ns();
+            rc = OQS_SIG_keypair(sig, pub_key, priv_key);
+            t1 = now_ns();
+            if (rc != OQS_SUCCESS) {
+                fprintf(stderr, "  KeyGen failed at iteration %d\n", i);
+                break;
+            }
+            samples[i] = t1 - t0;
         }
-        samples[i] = t1 - t0;
-    }
-    mem_after = read_peak_rss_kb();
+        mem_after = read_peak_rss_kb();
 
-    st = compute_stats(samples, N_ITERATIONS);
-    print_result(entry->display_name, "keygen", st, mem_after - mem_before);
-    csv_write_row(csv,
-        entry->display_name, entry->security_level, "keygen",
-        st, mem_after - mem_before,
-        (int)sig->length_public_key,
-        (int)sig->length_secret_key,
-        (int)sig->length_signature);
-    write_raw_samples(raw_csv, entry->display_name, "keygen", samples, N_ITERATIONS);
+        st = compute_stats(samples, N_ITERATIONS);
+        print_result(entry->display_name, "keygen", st, mem_after - mem_before);
+        csv_write_row(csv,
+            entry->display_name, entry->security_level, "keygen",
+            st, mem_after - mem_before,
+            (int)sig->length_public_key,
+            (int)sig->length_secret_key,
+            (int)sig->length_signature);
+        write_raw_samples(raw_csv, entry->display_name, "keygen", samples, N_ITERATIONS);
+    }
 
     /* ── Sign ────────────────────────────────────────────────────────────── */
 
-    /* generate one key pair to use for all sign iterations */
-    OQS_SIG_keypair(sig, pub_key, priv_key);
-
-    /* warm-up */
-    for (int i = 0; i < WARMUP_ITERS; i++)
-        OQS_SIG_sign(sig, signature, &sig_len, message, MESSAGE_LEN, priv_key);
-
-    mem_before = read_peak_rss_kb();
-    for (int i = 0; i < N_ITERATIONS; i++) {
-        t0 = now_ns();
-        rc = OQS_SIG_sign(sig, signature, &sig_len,
-                          message, MESSAGE_LEN, priv_key);
-        t1 = now_ns();
-        if (rc != OQS_SUCCESS) {
-            fprintf(stderr, "  Sign failed at iteration %d\n", i);
-            break;
-        }
-        samples[i] = t1 - t0;
+    if (do_sign || do_verify) {
+        /* generate one key pair to use for all sign iterations (and, if
+         * verify is isolated on its own, to have a valid key to sign with) */
+        OQS_SIG_keypair(sig, pub_key, priv_key);
     }
-    mem_after = read_peak_rss_kb();
 
-    st = compute_stats(samples, N_ITERATIONS);
-    print_result(entry->display_name, "sign", st, mem_after - mem_before);
-    csv_write_row(csv,
-        entry->display_name, entry->security_level, "sign",
-        st, mem_after - mem_before,
-        (int)sig->length_public_key,
-        (int)sig->length_secret_key,
-        (int)sig_len);          /* actual signed length (FALCON is variable) */
-    write_raw_samples(raw_csv, entry->display_name, "sign", samples, N_ITERATIONS);
+    if (do_sign) {
+        /* warm-up */
+        for (int i = 0; i < WARMUP_ITERS; i++)
+            OQS_SIG_sign(sig, signature, &sig_len, message, MESSAGE_LEN, priv_key);
+
+        mem_before = read_peak_rss_kb();
+        for (int i = 0; i < N_ITERATIONS; i++) {
+            t0 = now_ns();
+            rc = OQS_SIG_sign(sig, signature, &sig_len,
+                              message, MESSAGE_LEN, priv_key);
+            t1 = now_ns();
+            if (rc != OQS_SUCCESS) {
+                fprintf(stderr, "  Sign failed at iteration %d\n", i);
+                break;
+            }
+            samples[i] = t1 - t0;
+        }
+        mem_after = read_peak_rss_kb();
+
+        st = compute_stats(samples, N_ITERATIONS);
+        print_result(entry->display_name, "sign", st, mem_after - mem_before);
+        csv_write_row(csv,
+            entry->display_name, entry->security_level, "sign",
+            st, mem_after - mem_before,
+            (int)sig->length_public_key,
+            (int)sig->length_secret_key,
+            (int)sig_len);          /* actual signed length (FALCON is variable) */
+        write_raw_samples(raw_csv, entry->display_name, "sign", samples, N_ITERATIONS);
+    }
 
     /* ── Verify ──────────────────────────────────────────────────────────── */
 
-    /* produce one valid signature to verify repeatedly */
-    OQS_SIG_sign(sig, signature, &sig_len, message, MESSAGE_LEN, priv_key);
+    if (do_verify) {
+        /* produce one valid signature to verify repeatedly */
+        OQS_SIG_sign(sig, signature, &sig_len, message, MESSAGE_LEN, priv_key);
 
-    /* warm-up */
-    for (int i = 0; i < WARMUP_ITERS; i++)
-        OQS_SIG_verify(sig, message, MESSAGE_LEN, signature, sig_len, pub_key);
+        /* warm-up */
+        for (int i = 0; i < WARMUP_ITERS; i++)
+            OQS_SIG_verify(sig, message, MESSAGE_LEN, signature, sig_len, pub_key);
 
-    mem_before = read_peak_rss_kb();
-    for (int i = 0; i < N_ITERATIONS; i++) {
-        t0 = now_ns();
-        rc = OQS_SIG_verify(sig, message, MESSAGE_LEN,
-                            signature, sig_len, pub_key);
-        t1 = now_ns();
-        if (rc != OQS_SUCCESS) {
-            fprintf(stderr, "  Verify failed at iteration %d\n", i);
-            break;
+        mem_before = read_peak_rss_kb();
+        for (int i = 0; i < N_ITERATIONS; i++) {
+            t0 = now_ns();
+            rc = OQS_SIG_verify(sig, message, MESSAGE_LEN,
+                                signature, sig_len, pub_key);
+            t1 = now_ns();
+            if (rc != OQS_SUCCESS) {
+                fprintf(stderr, "  Verify failed at iteration %d\n", i);
+                break;
+            }
+            samples[i] = t1 - t0;
         }
-        samples[i] = t1 - t0;
-    }
-    mem_after = read_peak_rss_kb();
+        mem_after = read_peak_rss_kb();
 
-    st = compute_stats(samples, N_ITERATIONS);
-    print_result(entry->display_name, "verify", st, mem_after - mem_before);
-    csv_write_row(csv,
-        entry->display_name, entry->security_level, "verify",
-        st, mem_after - mem_before,
-        (int)sig->length_public_key,
-        (int)sig->length_secret_key,
-        (int)sig_len);
-    write_raw_samples(raw_csv, entry->display_name, "verify", samples, N_ITERATIONS);
+        st = compute_stats(samples, N_ITERATIONS);
+        print_result(entry->display_name, "verify", st, mem_after - mem_before);
+        csv_write_row(csv,
+            entry->display_name, entry->security_level, "verify",
+            st, mem_after - mem_before,
+            (int)sig->length_public_key,
+            (int)sig->length_secret_key,
+            (int)sig_len);
+        write_raw_samples(raw_csv, entry->display_name, "verify", samples, N_ITERATIONS);
+    }
 
     /* ── cleanup ──────────────────────────────────────────────────────────── */
     free(pub_key);
@@ -204,6 +221,12 @@ int main(int argc, char *argv[]) {
 
     const char *csv_path = (argc > 1) ? argv[1] : "results_pqc_x86.csv";
     const char *raw_csv_path = (argc > 2) ? argv[2] : "results_pqc_x86_raw.csv";
+    const char *only_algo = (argc > 3) ? argv[3] : NULL; /* optional: isolate one
+                                                             algorithm's oqs_name
+                                                             for perf-stat profiling */
+    const char *only_op   = (argc > 4) ? argv[4] : NULL; /* optional: "keygen",
+                                                             "sign", or "verify",
+                                                             for perf-stat profiling */
 
     FILE *csv = fopen(csv_path, "w");
     if (!csv) { perror("fopen"); return 1; }
@@ -217,13 +240,17 @@ int main(int argc, char *argv[]) {
     printf("  message size   : %d bytes\n", MESSAGE_LEN);
     printf("  output CSV     : %s\n", csv_path);
     printf("  raw samples CSV: %s\n", raw_csv_path);
+    if (only_algo) printf("  isolating algo : %s\n", only_algo);
+    if (only_op)   printf("  isolating op   : %s\n", only_op);
     printf("=================================================================\n");
 
     csv_write_header(csv);
     raw_csv_write_header(raw_csv);
 
-    for (int i = 0; i < N_ALGORITHMS; i++)
-        bench_algorithm(&ALGORITHMS[i], csv, raw_csv);
+    for (int i = 0; i < N_ALGORITHMS; i++) {
+        if (only_algo && strcmp(ALGORITHMS[i].oqs_name, only_algo) != 0) continue;
+        bench_algorithm(&ALGORITHMS[i], csv, raw_csv, only_op);
+    }
 
     fclose(csv);
     fclose(raw_csv);

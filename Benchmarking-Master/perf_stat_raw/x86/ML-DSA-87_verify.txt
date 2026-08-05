@@ -1,0 +1,15 @@
+
+ Performance counter stats for './bench_pqc_fast /tmp/pm_scratch.csv /tmp/pm_scratch_raw.csv ML-DSA-87 verify':
+
+        65.909.190      instructions:u                                                        
+        18.379.550      cycles:u                                                              
+           480.668      cache-references:u                                                    
+            30.252      cache-misses:u                                                        
+            47.724      branch-misses:u                                                       
+
+       0,005611173 seconds time elapsed
+
+       0,003297000 seconds user
+       0,002312000 seconds sys
+
+

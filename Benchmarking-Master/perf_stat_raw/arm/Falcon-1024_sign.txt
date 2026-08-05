@@ -1,0 +1,15 @@
+
+ Performance counter stats for './bench_pqc_fast /tmp/pm_scratch.csv /tmp/pm_scratch_raw.csv Falcon-1024 sign':
+
+       454,060,762      instructions:u                   #    1.36  insn per cycle            
+       333,359,561      cycles:u                                                              
+       123,733,228      cache-references:u                                                    
+           940,077      cache-misses:u                   #    0.76% of all cache refs         
+           513,872      branch-misses:u                                                       
+
+       0.190058247 seconds time elapsed
+
+       0.182243000 seconds user
+       0.008075000 seconds sys
+
+

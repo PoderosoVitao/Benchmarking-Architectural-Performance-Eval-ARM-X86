@@ -1,0 +1,15 @@
+
+ Performance counter stats for './bench_classical_fast /tmp/pm_scratch.csv /tmp/pm_scratch_raw.csv RSA-3072 verify':
+
+     1,234,707,715      instructions:u                   #    0.95  insn per cycle            
+     1,303,195,652      cycles:u                                                              
+       207,551,262      cache-references:u                                                    
+           678,357      cache-misses:u                   #    0.33% of all cache refs         
+           539,901      branch-misses:u                                                       
+
+       0.729963618 seconds time elapsed
+
+       0.724500000 seconds user
+       0.005590000 seconds sys
+
+

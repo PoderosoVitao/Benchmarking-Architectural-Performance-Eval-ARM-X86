@@ -24,8 +24,12 @@
 
 /* ── Configuration ─────────────────────────────────────────────────────────── */
 
+#ifndef N_ITERATIONS
 #define N_ITERATIONS   1000     /* number of timed iterations per operation   */
+#endif
+#ifndef WARMUP_ITERS
 #define WARMUP_ITERS     20     /* untimed warm-up iterations before benchmark */
+#endif
 #define MESSAGE_LEN      64     /* bytes of dummy message to sign              */
 
 /* ── Timing ─────────────────────────────────────────────────────────────────── */

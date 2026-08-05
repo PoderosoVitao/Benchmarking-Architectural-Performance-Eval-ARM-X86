@@ -1,0 +1,15 @@
+
+ Performance counter stats for './bench_pqc_fast /tmp/pm_scratch.csv /tmp/pm_scratch_raw.csv Falcon-512 keygen':
+
+     5,852,822,925      instructions:u                   #    1.72  insn per cycle            
+     3,403,430,959      cycles:u                                                              
+       973,651,286      cache-references:u                                                    
+           222,588      cache-misses:u                   #    0.02% of all cache refs         
+         5,701,313      branch-misses:u                                                       
+
+       1.900511832 seconds time elapsed
+
+       1.894247000 seconds user
+       0.004078000 seconds sys
+
+
