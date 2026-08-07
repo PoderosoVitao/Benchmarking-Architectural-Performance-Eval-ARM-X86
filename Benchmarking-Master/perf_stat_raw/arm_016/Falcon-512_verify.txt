@@ -1,0 +1,15 @@
+
+ Performance counter stats for './bench_pqc_fast /tmp/pm016_scratch.csv /tmp/pm016_scratch_raw.csv Falcon-512 verify':
+
+        89,638,780      instructions:u                   #    1.65  insn per cycle            
+        54,437,326      cycles:u                                                              
+        17,674,219      cache-references:u                                                    
+            93,015      cache-misses:u                   #    0.53% of all cache refs         
+           127,283      branch-misses:u                                                       
+
+       0.034612078 seconds time elapsed
+
+       0.034923000 seconds user
+       0.000000000 seconds sys
+
+

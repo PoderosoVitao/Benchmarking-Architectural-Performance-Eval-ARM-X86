@@ -1,0 +1,15 @@
+
+ Performance counter stats for './liboqs016-bin/bench_pqc_fast /tmp/pm016_scratch.csv /tmp/pm016_scratch_raw.csv Falcon-512 keygen':
+
+     6.880.437.315      instructions:u                                                        
+     2.191.304.728      cycles:u                                                              
+           768.296      cache-references:u                                                    
+            39.595      cache-misses:u                                                        
+           594.394      branch-misses:u                                                       
+
+       0,428903781 seconds time elapsed
+
+       0,427036000 seconds user
+       0,001057000 seconds sys
+
+

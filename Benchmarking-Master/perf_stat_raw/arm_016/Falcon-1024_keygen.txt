@@ -1,0 +1,15 @@
+
+ Performance counter stats for './bench_pqc_fast /tmp/pm016_scratch.csv /tmp/pm016_scratch_raw.csv Falcon-1024 keygen':
+
+    15,950,393,240      instructions:u                   #    1.69  insn per cycle            
+     9,461,011,689      cycles:u                                                              
+     2,622,846,177      cache-references:u                                                    
+         1,518,023      cache-misses:u                   #    0.06% of all cache refs         
+         9,951,070      branch-misses:u                                                       
+
+       5.268855692 seconds time elapsed
+
+       5.268345000 seconds user
+       0.000000000 seconds sys
+
+

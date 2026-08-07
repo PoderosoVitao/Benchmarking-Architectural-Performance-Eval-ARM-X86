@@ -1,0 +1,15 @@
+
+ Performance counter stats for './liboqs016-bin/bench_pqc_fast /tmp/pm016_scratch.csv /tmp/pm016_scratch_raw.csv SLH_DSA_PURE_SHAKE_128S sign':
+
+ 1.485.803.895.516      instructions:u                                                        
+   279.639.713.109      cycles:u                                                              
+         6.004.970      cache-references:u                                                    
+            81.963      cache-misses:u                                                        
+         5.423.666      branch-misses:u                                                       
+
+      55,188745565 seconds time elapsed
+
+      55,094060000 seconds user
+       0,001992000 seconds sys
+
+

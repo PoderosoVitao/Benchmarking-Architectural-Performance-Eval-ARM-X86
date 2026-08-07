@@ -1,0 +1,15 @@
+
+ Performance counter stats for './liboqs016-bin/bench_pqc_fast /tmp/pm016_scratch.csv /tmp/pm016_scratch_raw.csv ML-DSA-65 keygen':
+
+        46.242.967      instructions:u                                                        
+        13.646.189      cycles:u                                                              
+           636.038      cache-references:u                                                    
+            26.188      cache-misses:u                                                        
+            56.230      branch-misses:u                                                       
+
+       0,003951147 seconds time elapsed
+
+       0,002971000 seconds user
+       0,000989000 seconds sys
+
+

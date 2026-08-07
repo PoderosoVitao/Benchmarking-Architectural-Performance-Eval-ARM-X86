@@ -1,0 +1,15 @@
+
+ Performance counter stats for './liboqs016-bin/bench_pqc_fast /tmp/pm016_scratch.csv /tmp/pm016_scratch_raw.csv Falcon-512 sign':
+
+       234.764.846      instructions:u                                                        
+        80.532.315      cycles:u                                                              
+           669.854      cache-references:u                                                    
+            32.180      cache-misses:u                                                        
+           169.573      branch-misses:u                                                       
+
+       0,017258483 seconds time elapsed
+
+       0,017216000 seconds user
+       0,000000000 seconds sys
+
+

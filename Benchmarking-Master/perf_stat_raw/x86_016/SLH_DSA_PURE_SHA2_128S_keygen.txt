@@ -1,0 +1,15 @@
+
+ Performance counter stats for './liboqs016-bin/bench_pqc_fast /tmp/pm016_scratch.csv /tmp/pm016_scratch_raw.csv SLH_DSA_PURE_SHA2_128S keygen':
+
+   109.797.523.221      instructions:u                                                        
+    22.172.984.630      cycles:u                                                              
+           999.320      cache-references:u                                                    
+            42.992      cache-misses:u                                                        
+           204.086      branch-misses:u                                                       
+
+       4,413081377 seconds time elapsed
+
+       4,402290000 seconds user
+       0,002478000 seconds sys
+
+

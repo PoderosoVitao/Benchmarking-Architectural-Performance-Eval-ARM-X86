@@ -1,0 +1,15 @@
+
+ Performance counter stats for './bench_pqc_fast /tmp/pm016_scratch.csv /tmp/pm016_scratch_raw.csv ML-DSA-44 keygen':
+
+        60,819,495      instructions:u                   #    1.58  insn per cycle            
+        38,570,529      cycles:u                                                              
+        14,856,605      cache-references:u                                                    
+           158,865      cache-misses:u                   #    1.07% of all cache refs         
+            68,459      branch-misses:u                                                       
+
+       0.025829629 seconds time elapsed
+
+       0.021189000 seconds user
+       0.004934000 seconds sys
+
+

@@ -1,0 +1,15 @@
+
+ Performance counter stats for './liboqs016-bin/bench_pqc_fast /tmp/pm016_scratch.csv /tmp/pm016_scratch_raw.csv ML-DSA-65 sign':
+
+       127.068.893      instructions:u                                                        
+        34.661.605      cycles:u                                                              
+         1.712.072      cache-references:u                                                    
+            31.109      cache-misses:u                                                        
+            72.618      branch-misses:u                                                       
+
+       0,008725479 seconds time elapsed
+
+       0,008716000 seconds user
+       0,000000000 seconds sys
+
+

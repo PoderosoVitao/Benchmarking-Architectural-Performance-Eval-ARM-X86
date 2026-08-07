@@ -1,0 +1,15 @@
+
+ Performance counter stats for './liboqs016-bin/bench_pqc_fast /tmp/pm016_scratch.csv /tmp/pm016_scratch_raw.csv Falcon-1024 keygen':
+
+    20.401.937.590      instructions:u                                                        
+     6.921.150.648      cycles:u                                                              
+         2.330.296      cache-references:u                                                    
+            34.475      cache-misses:u                                                        
+         2.522.961      branch-misses:u                                                       
+
+       1,348928023 seconds time elapsed
+
+       1,345195000 seconds user
+       0,001494000 seconds sys
+
+

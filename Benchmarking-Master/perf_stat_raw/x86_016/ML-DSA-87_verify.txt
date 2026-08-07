@@ -1,0 +1,15 @@
+
+ Performance counter stats for './liboqs016-bin/bench_pqc_fast /tmp/pm016_scratch.csv /tmp/pm016_scratch_raw.csv ML-DSA-87 verify':
+
+        66.941.402      instructions:u                                                        
+        18.797.916      cycles:u                                                              
+           677.143      cache-references:u                                                    
+            28.056      cache-misses:u                                                        
+            48.357      branch-misses:u                                                       
+
+       0,004720653 seconds time elapsed
+
+       0,004716000 seconds user
+       0,000000000 seconds sys
+
+

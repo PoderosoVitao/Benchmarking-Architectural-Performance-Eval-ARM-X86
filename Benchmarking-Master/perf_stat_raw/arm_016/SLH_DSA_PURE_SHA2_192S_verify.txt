@@ -1,0 +1,15 @@
+
+ Performance counter stats for './bench_pqc_fast /tmp/pm016_scratch.csv /tmp/pm016_scratch_raw.csv SLH_DSA_PURE_SHA2_192S verify':
+
+     9,496,472,605      instructions:u                   #    2.11  insn per cycle            
+     4,495,314,389      cycles:u                                                              
+     1,040,040,067      cache-references:u                                                    
+           107,164      cache-misses:u                   #    0.01% of all cache refs         
+         2,013,715      branch-misses:u                                                       
+
+       2.504620398 seconds time elapsed
+
+       2.500623000 seconds user
+       0.004000000 seconds sys
+
+
