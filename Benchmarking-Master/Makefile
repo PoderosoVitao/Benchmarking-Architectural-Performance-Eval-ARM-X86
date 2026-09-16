@@ -8,18 +8,37 @@
 #   make run        - build and run both benchmarks sequentially
 #   make clean      - remove binaries and CSV output
 #
+# Output filenames carry PLATFORM (default x86); set it on the ARM host:
+#   make run PLATFORM=arm    - writes results_{pqc,classical}_arm.csv
+#
 # Prerequisites (Ubuntu 22.04):
 #   sudo apt install build-essential cmake ninja-build libssl-dev
-#   # Then build and install liboqs:
-#   git clone --depth 1 https://github.com/open-quantum-safe/liboqs.git
-#   cmake -S liboqs -B liboqs/build -DCMAKE_INSTALL_PREFIX=/usr/local \
+#   # Then build and install liboqs. The paper's numbers come from liboqs
+#   # 0.16.0 at commit 5a1a854; a --depth 1 clone cannot check that commit
+#   # out, so clone fully and pin it. The install prefix must match
+#   # OQS_PREFIX below, which defaults to $(HOME)/liboqs-install:
+#   git clone https://github.com/open-quantum-safe/liboqs.git
+#   git -C liboqs checkout 5a1a854
+#   cmake -S liboqs -B liboqs/build -DCMAKE_INSTALL_PREFIX=$$HOME/liboqs-install \
 #         -DOQS_DIST_BUILD=ON -GNinja
 #   cmake --build liboqs/build --parallel
-#   sudo cmake --install liboqs/build
+#   cmake --install liboqs/build
+#   # To install system-wide instead, use -DCMAKE_INSTALL_PREFIX=/usr/local
+#   # with `sudo cmake --install`, then build with: make OQS_PREFIX=/usr/local
 # ──────────────────────────────────────────────────────────────────────────
 
 CC      = gcc
 OQS_PREFIX ?= $(HOME)/liboqs-install
+
+# Platform tag used in output filenames. analyze.py expects the ARM results
+# to be named results_{pqc,classical}_arm.csv, so run `make PLATFORM=arm`
+# there rather than renaming afterwards.
+PLATFORM ?= x86
+
+PQC_CSV           = results_pqc_$(PLATFORM).csv
+PQC_CSV_RAW       = results_pqc_$(PLATFORM)_raw.csv
+CLASSICAL_CSV     = results_classical_$(PLATFORM).csv
+CLASSICAL_CSV_RAW = results_classical_$(PLATFORM)_raw.csv
 CFLAGS  = -O2 -Wall -Wextra -I$(OQS_PREFIX)/include
 LDFLAGS = -L$(OQS_PREFIX)/lib
 
@@ -58,21 +77,21 @@ bench_classical_fast: bench_classical.c benchmark.h
 run: all run_pqc run_classical
 	@echo ""
 	@echo "All benchmarks complete."
-	@echo "Results: results_pqc_x86.csv  results_classical_x86.csv"
+	@echo "Results: $(PQC_CSV)  $(CLASSICAL_CSV)"
 
 run_pqc: bench_pqc
 	@echo ""
 	@echo "--- Running PQC benchmark ---"
-	./bench_pqc results_pqc_x86.csv
+	./bench_pqc $(PQC_CSV) $(PQC_CSV_RAW)
 
 run_classical: bench_classical
 	@echo ""
 	@echo "--- Running classical baseline benchmark ---"
-	./bench_classical results_classical_x86.csv
+	./bench_classical $(CLASSICAL_CSV) $(CLASSICAL_CSV_RAW)
 
 # ── cleanup ───────────────────────────────────────────────────────────────
 clean:
-	rm -f $(TARGETS) results_pqc_x86.csv results_classical_x86.csv
+	rm -f $(TARGETS) $(PQC_CSV) $(CLASSICAL_CSV)
 
 # ── dependency installation hint ─────────────────────────────────────────
 install_deps:
@@ -81,9 +100,15 @@ install_deps:
 	sudo apt-get install -y build-essential cmake ninja-build \
 	    libssl-dev pkg-config git
 	@echo ""
-	@echo "Now build and install liboqs:"
-	@echo "  git clone --depth 1 https://github.com/open-quantum-safe/liboqs.git"
-	@echo "  cmake -S liboqs -B liboqs/build -DCMAKE_INSTALL_PREFIX=/usr/local \\"
+	@echo "Now build and install liboqs (full clone: --depth 1 cannot check"
+	@echo "out the pinned commit 5a1a854 the paper's numbers come from):"
+	@echo "  git clone https://github.com/open-quantum-safe/liboqs.git"
+	@echo "  git -C liboqs checkout 5a1a854"
+	@echo "  cmake -S liboqs -B liboqs/build -DCMAKE_INSTALL_PREFIX=$$HOME/liboqs-install \\"
 	@echo "        -DOQS_DIST_BUILD=ON -GNinja"
 	@echo "  cmake --build liboqs/build --parallel"
-	@echo "  sudo cmake --install liboqs/build"
+	@echo "  cmake --install liboqs/build"
+	@echo ""
+	@echo "That prefix matches OQS_PREFIX's default. For a system-wide"
+	@echo "install use -DCMAKE_INSTALL_PREFIX=/usr/local with sudo, then"
+	@echo "build the harnesses with: make OQS_PREFIX=/usr/local"

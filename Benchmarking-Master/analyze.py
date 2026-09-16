@@ -1,6 +1,20 @@
 #!/usr/bin/env python3
-"""Recomputes all paper numbers (Tables 1-3, slowdown ratios, figure) from
-the re-run CSVs. Run with both x86 and ARM data present."""
+"""Cross-platform latency comparison from a pair of result directories.
+
+Given the x86 and ARM result directories, this:
+  - prints the per-operation latency table for each platform (mean, std, P99
+    and peak-RSS delta), the material behind the paper's Table 2;
+  - prints and writes the ARM/x86 mean-latency ratios to
+    <arm_dir>/slowdown_ratios.csv;
+  - prints the per-family min-max ratio bands quoted in Section 5.1;
+  - saves the slowdown bar chart to <arm_dir>/fig_slowdown_ratio.png.
+
+Given only the x86 directory it stops after printing the x86 table.
+
+It does not produce Table 1 (hardware environment, not measured here) or
+Table 3 (the vectorization ablation, which needs the paired liboqs builds and
+is not driven from this repository). Table 4 comes from parse_perf_matrix.py.
+"""
 import sys
 import pandas as pd
 import matplotlib
