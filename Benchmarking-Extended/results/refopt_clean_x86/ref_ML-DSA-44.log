@@ -1,0 +1,29 @@
+NOTE: RAPL energy counter unavailable (/sys/class/powercap/intel-rapl:0/energy_uj: Permission denied) — energy columns will read as -1.
+  On x86 this is almost always a permission issue: /sys/class/powercap/intel-rapl:0/energy_uj is root-only by default.
+  Options: run via sudo, `sudo setcap cap_dac_read_search=ep <binary>`, or a udev rule granting read access.
+=================================================================
+  PQC Benchmark — Dilithium / FALCON / SPHINCS+
+  liboqs version : 0.16.0
+  iterations     : 100  (+ 100ms time-bounded warm-up)
+  message size   : 64 bytes
+  output CSV     : /home/vhbr/Projects/TCC/Benchmarking/refopt_clean_x86/ref_ML-DSA-44.csv
+  raw samples CSV: /home/vhbr/Projects/TCC/Benchmarking/refopt_clean_x86/ref_ML-DSA-44_raw.csv
+  isolating algo : ML-DSA-44
+  CPU dispatch   : reference-only build (OQS_DIST_BUILD off) —
+                   optimized backends are not compiled in; every
+                   call below is unconditionally the portable path.
+  Timer overhead : CLOCK_MONOTONIC=20.7 ns/call (consistent with vDSO)
+                   CLOCK_PROCESS_CPUTIME_ID=554.8 ns/call (consistent with syscall path)
+                   (measured here, not assumed — see log_timer_overhead())
+=================================================================
+
+[ML-DSA-44 (Dilithium2)]  (NIST Level 2)
+  ML-DSA-44 (Dilithium2)       keygen    mean=    192295 cyc  median=    192548 cyc  std=     1700 cyc  P99=    195754 cyc  |  mean=  0.0479 ms  mem_delta=    0 kB  energy=n/a
+  ML-DSA-44 (Dilithium2)       sign      mean=    691018 cyc  median=    517993 cyc  std=   472136 cyc  P99=   2108311 cyc  |  mean=  0.1655 ms  mem_delta=    0 kB  energy=n/a
+  ML-DSA-44 (Dilithium2)       verify    mean=    199682 cyc  median=    199418 cyc  std=     1717 cyc  P99=    202327 cyc  |  mean=  0.0494 ms  mem_delta=    0 kB  energy=n/a
+  ML-DSA-44 (Dilithium2)       verify_invalid  mean=    199798 cyc  median=    199728 cyc  std=      503 cyc  P99=    202711 cyc  |  mean=  0.0424 ms  mem_delta=    0 kB  energy=n/a
+  Stack high-water mark : 54304 bytes (see /home/vhbr/Projects/TCC/Benchmarking/refopt_clean_x86/ref_ML-DSA-44.csv.stack_hwm_bytes)
+
+=================================================================
+  Done. Results written to: /home/vhbr/Projects/TCC/Benchmarking/refopt_clean_x86/ref_ML-DSA-44.csv
+=================================================================

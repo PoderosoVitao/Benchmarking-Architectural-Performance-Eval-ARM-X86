@@ -1,0 +1,29 @@
+NOTE: RAPL energy counter unavailable (/sys/class/powercap/intel-rapl:0/energy_uj: No such file or directory) — energy columns will read as -1.
+  On x86 this is almost always a permission issue: /sys/class/powercap/intel-rapl:0/energy_uj is root-only by default.
+  Options: run via sudo, `sudo setcap cap_dac_read_search=ep <binary>`, or a udev rule granting read access.
+=================================================================
+  PQC Benchmark — Dilithium / FALCON / SPHINCS+
+  liboqs version : 0.16.0
+  iterations     : 100  (+ 100ms time-bounded warm-up)
+  message size   : 64 bytes
+  output CSV     : /home/vhbraz/bench-full-latest/refopt_clean_arm/ref_ML-DSA-87.csv
+  raw samples CSV: /home/vhbraz/bench-full-latest/refopt_clean_arm/ref_ML-DSA-87_raw.csv
+  isolating algo : ML-DSA-87
+  CPU dispatch   : reference-only build (OQS_DIST_BUILD off) —
+                   optimized backends are not compiled in; every
+                   call below is unconditionally the portable path.
+  Timer overhead : CLOCK_MONOTONIC=43.9 ns/call (consistent with vDSO)
+                   CLOCK_PROCESS_CPUTIME_ID=844.6 ns/call (consistent with syscall path)
+                   (measured here, not assumed — see log_timer_overhead())
+=================================================================
+
+[ML-DSA-87 (Dilithium5)]  (NIST Level 5)
+  ML-DSA-87 (Dilithium5)       keygen    mean=    852524 cyc  median=    853172 cyc  std=     3413 cyc  P99=    857851 cyc  |  mean=  0.4801 ms  mem_delta=    0 kB  energy=n/a
+  ML-DSA-87 (Dilithium5)       sign      mean=   2209926 cyc  median=   1804104 cyc  std=  1221316 cyc  P99=   5648240 cyc  |  mean=  1.2354 ms  mem_delta=    0 kB  energy=n/a
+  ML-DSA-87 (Dilithium5)       verify    mean=    861475 cyc  median=    861144 cyc  std=      914 cyc  P99=    864299 cyc  |  mean=  0.4839 ms  mem_delta=    0 kB  energy=n/a
+  ML-DSA-87 (Dilithium5)       verify_invalid  mean=    861305 cyc  median=    860864 cyc  std=     1597 cyc  P99=    864856 cyc  |  mean=  0.4838 ms  mem_delta=    0 kB  energy=n/a
+  Stack high-water mark : 116880 bytes (see /home/vhbraz/bench-full-latest/refopt_clean_arm/ref_ML-DSA-87.csv.stack_hwm_bytes)
+
+=================================================================
+  Done. Results written to: /home/vhbraz/bench-full-latest/refopt_clean_arm/ref_ML-DSA-87.csv
+=================================================================

@@ -1,0 +1,29 @@
+NOTE: RAPL energy counter unavailable (/sys/class/powercap/intel-rapl:0/energy_uj: Permission denied) — energy columns will read as -1.
+  On x86 this is almost always a permission issue: /sys/class/powercap/intel-rapl:0/energy_uj is root-only by default.
+  Options: run via sudo, `sudo setcap cap_dac_read_search=ep <binary>`, or a udev rule granting read access.
+=================================================================
+  PQC Benchmark — Dilithium / FALCON / SPHINCS+
+  liboqs version : 0.16.0
+  iterations     : 100  (+ 100ms time-bounded warm-up)
+  message size   : 64 bytes
+  output CSV     : /home/vhbr/Projects/TCC/Benchmarking/refopt_clean_x86/ref_Falcon-512.csv
+  raw samples CSV: /home/vhbr/Projects/TCC/Benchmarking/refopt_clean_x86/ref_Falcon-512_raw.csv
+  isolating algo : Falcon-512
+  CPU dispatch   : reference-only build (OQS_DIST_BUILD off) —
+                   optimized backends are not compiled in; every
+                   call below is unconditionally the portable path.
+  Timer overhead : CLOCK_MONOTONIC=15.8 ns/call (consistent with vDSO)
+                   CLOCK_PROCESS_CPUTIME_ID=394.2 ns/call (consistent with syscall path)
+                   (measured here, not assumed — see log_timer_overhead())
+=================================================================
+
+[Falcon-512]  (NIST Level 1)
+  Falcon-512                   keygen    mean=  45564553 cyc  median=  40379062 cyc  std= 14184057 cyc  P99=  87462407 cyc  |  mean=  8.8718 ms  mem_delta=    0 kB  energy=n/a
+  Falcon-512                   sign      mean=  13445557 cyc  median=  13443223 cyc  std=    32029 cyc  P99=  13513239 cyc  |  mean=  2.6193 ms  mem_delta=    0 kB  energy=n/a
+  Falcon-512                   verify    mean=    118967 cyc  median=    118724 cyc  std=     2066 cyc  P99=    120436 cyc  |  mean=  0.0249 ms  mem_delta=    0 kB  energy=n/a
+  Falcon-512                   verify_invalid  mean=    118978 cyc  median=    118802 cyc  std=      520 cyc  P99=    120985 cyc  |  mean=  0.0250 ms  mem_delta=    0 kB  energy=n/a
+  Stack high-water mark : 49232 bytes (see /home/vhbr/Projects/TCC/Benchmarking/refopt_clean_x86/ref_Falcon-512.csv.stack_hwm_bytes)
+
+=================================================================
+  Done. Results written to: /home/vhbr/Projects/TCC/Benchmarking/refopt_clean_x86/ref_Falcon-512.csv
+=================================================================

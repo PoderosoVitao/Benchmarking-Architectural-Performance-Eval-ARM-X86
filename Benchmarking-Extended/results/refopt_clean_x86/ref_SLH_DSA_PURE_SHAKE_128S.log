@@ -1,0 +1,29 @@
+NOTE: RAPL energy counter unavailable (/sys/class/powercap/intel-rapl:0/energy_uj: Permission denied) — energy columns will read as -1.
+  On x86 this is almost always a permission issue: /sys/class/powercap/intel-rapl:0/energy_uj is root-only by default.
+  Options: run via sudo, `sudo setcap cap_dac_read_search=ep <binary>`, or a udev rule granting read access.
+=================================================================
+  PQC Benchmark — Dilithium / FALCON / SPHINCS+
+  liboqs version : 0.16.0
+  iterations     : 100  (+ 100ms time-bounded warm-up)
+  message size   : 64 bytes
+  output CSV     : /home/vhbr/Projects/TCC/Benchmarking/refopt_clean_x86/ref_SLH_DSA_PURE_SHAKE_128S.csv
+  raw samples CSV: /home/vhbr/Projects/TCC/Benchmarking/refopt_clean_x86/ref_SLH_DSA_PURE_SHAKE_128S_raw.csv
+  isolating algo : SLH_DSA_PURE_SHAKE_128S
+  CPU dispatch   : reference-only build (OQS_DIST_BUILD off) —
+                   optimized backends are not compiled in; every
+                   call below is unconditionally the portable path.
+  Timer overhead : CLOCK_MONOTONIC=15.9 ns/call (consistent with vDSO)
+                   CLOCK_PROCESS_CPUTIME_ID=394.6 ns/call (consistent with syscall path)
+                   (measured here, not assumed — see log_timer_overhead())
+=================================================================
+
+[SLH-DSA-SHAKE-128s (SPHINCS+)]  (NIST Level 1)
+  SLH-DSA-SHAKE-128s (SPHINCS+) keygen    mean= 303004351 cyc  median= 302908066 cyc  std=   452261 cyc  P99= 305492465 cyc  |  mean= 60.5838 ms  mem_delta=    0 kB  energy=n/a
+  SLH-DSA-SHAKE-128s (SPHINCS+) sign      mean=2320034035 cyc  median=2318758715 cyc  std=  9727351 cyc  P99=2325816216 cyc  |  mean=465.3359 ms  mem_delta=    0 kB  energy=n/a
+  SLH-DSA-SHAKE-128s (SPHINCS+) verify    mean=   2325311 cyc  median=   2319217 cyc  std=    44516 cyc  P99=   2542066 cyc  |  mean=  0.4692 ms  mem_delta=    0 kB  energy=n/a
+  SLH-DSA-SHAKE-128s (SPHINCS+) verify_invalid  mean=   2272667 cyc  median=   2272068 cyc  std=     2182 cyc  P99=   2280827 cyc  |  mean=  0.4585 ms  mem_delta=    0 kB  energy=n/a
+  Stack high-water mark : 5832 bytes (see /home/vhbr/Projects/TCC/Benchmarking/refopt_clean_x86/ref_SLH_DSA_PURE_SHAKE_128S.csv.stack_hwm_bytes)
+
+=================================================================
+  Done. Results written to: /home/vhbr/Projects/TCC/Benchmarking/refopt_clean_x86/ref_SLH_DSA_PURE_SHAKE_128S.csv
+=================================================================
