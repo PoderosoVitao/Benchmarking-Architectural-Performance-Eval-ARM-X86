@@ -1,0 +1,15 @@
+# Python dependencies for the analysis scripts in this directory.
+#
+#   analyze.py             pandas, matplotlib, numpy
+#   plot_tail_variance.py  pandas, matplotlib
+#   parse_perf_matrix.py   standard library only (csv, re, sys, pathlib)
+#
+# The one hard floor the code imposes is matplotlib >= 3.9:
+# plot_tail_variance.py calls Axes.boxplot(tick_labels=...), which was named
+# `labels` before 3.9. The pins below are a mutually compatible known-good
+# set, not a record of the versions used for the published runs -- those were
+# not captured at measurement time.
+
+pandas==2.2.3
+matplotlib==3.9.2
+numpy==2.1.3

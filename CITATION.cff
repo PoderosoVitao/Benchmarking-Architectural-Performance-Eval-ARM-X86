@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use this benchmark suite or its measurement data, please cite the paper below."
+title: "Benchmark suite and data for An Architectural Performance Evaluation of Post-Quantum and Classical Digital Signature Algorithms on x86 and ARM"
+abstract: >-
+  C benchmark harnesses, shell drivers, raw measurement data and analysis
+  scripts for a cross-architecture evaluation of ML-DSA, SLH-DSA and Falcon
+  against RSA-3072 and ECDSA-P256 on x86_64 and AArch64.
+authors:
+  - family-names: Braz
+    given-names: "Victor H."
+    affiliation: "Pontifícia Universidade Católica de Minas Gerais (PUC Minas)"
+  - family-names: Souza
+    given-names: "Matheus A."
+    affiliation: "Pontifícia Universidade Católica de Minas Gerais (PUC Minas)"
+license: MIT
+repository-code: "https://github.com/PoderosoVitao/Benchmarking-Architectural-Performance-Eval-ARM-X86"
+keywords:
+  - post-quantum cryptography
+  - digital signatures
+  - benchmarking
+  - computer architecture
+  - ML-DSA
+  - SLH-DSA
+  - Falcon
+preferred-citation:
+  type: conference-paper
+  title: "An Architectural Performance Evaluation of Post-Quantum and Classical Digital Signature Algorithms on x86 and ARM"
+  authors:
+    - family-names: Braz
+      given-names: "Victor H."
+    - family-names: Souza
+      given-names: "Matheus A."
+  collection-title: "Simpósio em Sistemas Computacionais de Alto Desempenho (SSCAD)"
+  year: 2026
+  notes: "Under review"
